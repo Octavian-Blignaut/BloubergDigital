@@ -32,7 +32,7 @@ This repository hosts the Blouberg Digital website, served via GitHub Pages. It'
 
 ## Get in touch
 
-📱 WhatsApp: [+27 XX XXX XXXX](https://wa.me/27000000000)
+📱 WhatsApp: [+27 64 508 1270]
 📧 hello@bloubergdigital.co.za
 
 ---
