@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blouberg Digital — AI that answers when you can't</title>
+<meta name="description" content="Blouberg Digital gives West Coast businesses AI assistants that reply, quote, and book customers 24/7. Local, affordable, installed this week.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ocean:#0B3C5D;      /* deep Atlantic blue */
+    --ocean-dark:#072A42;
+    --sand:#F7F3EC;       /* white-sand background */
+    --foam:#DDEAF2;       /* pale sea foam */
+    --kelp:#1F7A5C;       /* action green (WhatsApp-adjacent, functional) */
+    --ink:#15222C;
+    --muted:#5A6B78;
+    --line:#E3DCCF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--sand);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Archivo',sans-serif;line-height:1.12;letter-spacing:-0.015em}
+  a{color:inherit}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+
+  /* ---------- header ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(247,243,236,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.15rem;color:var(--ocean);text-decoration:none;display:flex;align-items:center;gap:.55rem}
+  .logo .mark{width:26px;height:26px;flex:none}
+  .nav a.cta{background:var(--ocean);color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;padding:.55rem 1.1rem;border-radius:8px;transition:background .2s}
+  .nav a.cta:hover{background:var(--ocean-dark)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 72px;position:relative;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-block;font-size:.78rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--kelp);margin-bottom:14px}
+  .hero h1{font-size:clamp(2.1rem,4.6vw,3.2rem);font-weight:800;color:var(--ocean)}
+  .hero h1 em{font-style:normal;color:var(--kelp)}
+  .hero p.lede{margin-top:18px;font-size:1.08rem;color:var(--muted);max-width:34rem}
+  .hero .actions{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;text-decoration:none;font-weight:600;font-size:.95rem;padding:.85rem 1.5rem;border-radius:10px;transition:transform .15s,background .2s}
+  .btn:active{transform:scale(.98)}
+  .btn-green{background:var(--kelp);color:#fff}
+  .btn-green:hover{background:#186247}
+  .btn-ghost{border:1.5px solid var(--ocean);color:var(--ocean)}
+  .btn-ghost:hover{background:var(--foam)}
+  .hero .trust{margin-top:22px;font-size:.85rem;color:var(--muted)}
+
+  /* ---------- signature: whatsapp demo ---------- */
+  .phone{background:var(--ocean);border-radius:26px;padding:10px;box-shadow:0 24px 60px -20px rgba(11,60,93,.45);max-width:360px;margin-left:auto}
+  .screen{background:#E7E1D8;border-radius:18px;overflow:hidden}
+  .chat-head{background:var(--ocean-dark);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px}
+  .chat-head .avatar{width:34px;height:34px;border-radius:50%;background:var(--kelp);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#fff;flex:none}
+  .chat-head .who{font-size:.88rem;font-weight:600}
+  .chat-head .status{font-size:.72rem;opacity:.75}
+  .chat{padding:16px 12px 18px;display:flex;flex-direction:column;gap:9px;min-height:300px}
+  .bubble{max-width:82%;padding:.6rem .8rem;border-radius:12px;font-size:.85rem;line-height:1.45;opacity:0;transform:translateY(8px);animation:pop .4s forwards}
+  .from-them{background:#fff;border-top-left-radius:4px;align-self:flex-start}
+  .from-ai{background:#D3F2E3;border-top-right-radius:4px;align-self:flex-end}
+  .stamp{font-size:.65rem;color:var(--muted);display:block;margin-top:4px;text-align:right}
+  @keyframes pop{to{opacity:1;transform:translateY(0)}}
+  .b1{animation-delay:.4s}.b2{animation-delay:1.3s}.b3{animation-delay:2.4s}.b4{animation-delay:3.5s}
+  @media (prefers-reduced-motion:reduce){.bubble{animation:none;opacity:1;transform:none}}
+
+  /* ---------- sections ---------- */
+  section{padding:72px 0}
+  .sec-label{font-size:.78rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--kelp);margin-bottom:12px}
+  h2{font-size:clamp(1.6rem,3.2vw,2.2rem);font-weight:800;color:var(--ocean);max-width:36rem}
+  .sub{margin-top:14px;color:var(--muted);max-width:36rem}
+
+  /* leaks */
+  .leaks{background:var(--ocean);color:#fff}
+  .leaks h2{color:#fff}
+  .leaks .sub{color:#B9CDDC}
+  .leak-grid{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.12);border-radius:14px;overflow:hidden}
+  .leak{background:var(--ocean);padding:26px 24px}
+  .leak h3{font-size:1.02rem;color:#fff;margin-bottom:8px}
+  .leak p{font-size:.9rem;color:#B9CDDC}
+  .leak .fix{margin-top:12px;font-size:.85rem;font-weight:600;color:#7FDDB4}
+
+  /* packages */
+  .pack-grid{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .pack{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 26px;display:flex;flex-direction:column}
+  .pack.featured{border:2px solid var(--kelp);position:relative}
+  .pack.featured .flag{position:absolute;top:-12px;left:24px;background:var(--kelp);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.25rem .7rem;border-radius:999px}
+  .pack h3{font-size:1.15rem;color:var(--ocean)}
+  .pack .price{margin:10px 0 4px;font-family:'Archivo',sans-serif;font-weight:800;font-size:1.5rem;color:var(--ink)}
+  .pack .per{font-size:.8rem;color:var(--muted);margin-bottom:16px}
+  .pack ul{list-style:none;flex:1}
+  .pack li{font-size:.9rem;padding:.42rem 0 .42rem 1.5rem;position:relative;color:#2C3E4C}
+  .pack li::before{content:"";position:absolute;left:0;top:.78rem;width:9px;height:9px;border-radius:2px;background:var(--kelp)}
+  .pack .btn{margin-top:20px;text-align:center;background:var(--ocean);color:#fff}
+  .pack .btn:hover{background:var(--ocean-dark)}
+
+  /* how */
+  .steps{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
+  .step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px;counter-increment:step}
+  .step::before{content:counter(step);display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--foam);color:var(--ocean);font-family:'Archivo',sans-serif;font-weight:800;align-items:center;justify-content:center;margin-bottom:14px}
+  .step h3{font-size:1rem;color:var(--ocean);margin-bottom:6px}
+  .step p{font-size:.9rem;color:var(--muted)}
+
+  /* about + audit */
+  .about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .audit-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px 28px}
+  .audit-card h3{color:var(--ocean);font-size:1.2rem;margin-bottom:10px}
+  .audit-card p{font-size:.92rem;color:var(--muted);margin-bottom:18px}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;font-size:.85rem;color:var(--muted)}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  @media(max-width:860px){
+    .hero .wrap,.about .wrap{grid-template-columns:1fr;gap:40px}
+    .phone{margin:0 auto}
+    .leak-grid,.pack-grid,.steps{grid-template-columns:1fr}
+    section{padding:56px 0}
+  }
+  :focus-visible{outline:3px solid var(--kelp);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Blouberg Digital home">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M2 22 L12 8 L20 18 L26 11 L30 22 Z" fill="#0B3C5D"/>
+        <path d="M2 25 C7 23,11 27,16 25 C21 23,25 27,30 25 L30 28 L2 28 Z" fill="#1F7A5C"/>
+      </svg>
+      Blouberg Digital
+    </a>
+    <a class="cta" href="https://wa.me/27645081270?text=Hi%2C%20I%27d%20like%20a%20free%20online%20checkup%20for%20my%20business" >Get your free checkup</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Table View · Blouberg · Parklands · West Coast</span>
+      <h1>Big-business AI, <em>for local business.</em></h1>
+      <p class="lede">Your customers message at 9pm. They want a quote, a booking, an answer — and if they don't get one, they phone the next guy. Blouberg Digital gives your business an AI assistant that replies, quotes and books for you, 24/7, on the WhatsApp number you already use.</p>
+      <div class="actions">
+        <a class="btn btn-green" href="https://wa.me/27645081270?text=Hi%2C%20I%27d%20like%20a%20free%20online%20checkup%20for%20my%20business">WhatsApp me for a free checkup</a>
+        <a class="btn btn-ghost" href="#packages">See packages</a>
+      </div>
+      <p class="trust">Local. No agency jargon. If it doesn't get you customers, you don't pay a monthly cent.</p>
+    </div>
+
+    <!-- signature: live chat demo -->
+    <div class="phone" role="img" aria-label="Demo of an AI assistant answering a customer on WhatsApp at night">
+      <div class="screen">
+        <div class="chat-head">
+          <span class="avatar">DP</span>
+          <div>
+            <div class="who">Deon's Plumbing</div>
+            <div class="status">online · answers in seconds</div>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="bubble from-them b1">Hi, my geyser is leaking through the ceiling 😰 do you do emergencies?<span class="stamp">21:47</span></div>
+          <div class="bubble from-ai b2">Yes we do — sorry to hear that! Can you send me your suburb and a photo of the leak? I'll get you a call-out slot right away.<span class="stamp">21:47</span></div>
+          <div class="bubble from-them b3">Parklands. Photo coming now.<span class="stamp">21:48</span></div>
+          <div class="bubble from-ai b4">Got it ✅ Deon can be there tomorrow 7:30am. Call-out fee R450, quoted before any work starts. Shall I book you in?<span class="stamp">21:48</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAKS -->
+<section class="leaks">
+  <div class="wrap">
+    <p class="sec-label" style="color:#7FDDB4">Where the money goes</p>
+    <h2>Good businesses lose customers in three quiet ways.</h2>
+    <p class="sub">You do great work. Your reviews prove it. But between jobs, nobody's watching the phone — and that's exactly when customers slip away.</p>
+    <div class="leak-grid">
+      <div class="leak">
+        <h3>The missed call</h3>
+        <p>You're under a car or up a ladder. The call rings out. That customer phones your competitor next — and never calls back.</p>
+        <p class="fix">→ Missed-call auto-reply, instantly</p>
+      </div>
+      <div class="leak">
+        <h3>The quote that never went out</h3>
+        <p>The enquiry came in, the week got busy, the quote was never sent. The customer waited, then gave up — and told their neighbours.</p>
+        <p class="fix">→ Every enquiry captured and tracked</p>
+      </div>
+      <div class="leak">
+        <h3>The invisible listing</h3>
+        <p>Wrong hours on Google. Fourteen reviews while the competition has sixty. Customers judge before they ever contact you.</p>
+        <p class="fix">→ Profile fixed, reviews on autopilot</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="wrap">
+    <p class="sec-label">Packages</p>
+    <h2>Pick your fix. Installed within the week.</h2>
+    <p class="sub">Straight prices, no proposals, no six-week timelines. You'll know exactly what you're getting before you pay a rand.</p>
+    <div class="pack-grid">
+      <div class="pack">
+        <h3>Get Found</h3>
+        <p class="price">R2,950</p>
+        <p class="per">once-off</p>
+        <ul>ff
+          <li>Google Business Profile claimed &amp; fixed</li>
+          <li>Correct hours, photos, services</li>
+          <li>Automatic review requests after every job</li>
+          <li>Reply templates for good &amp; bad reviews</li>
+        </ul>
+        <a class="btn" href="https://wa.me/27645081270?text=Hi%2C%20I%27m%20interested%20in%20Get%20Found">Start with Get Found</a>
+      </div>
+      <div class="pack featured">
+        <span class="flag">Most popular</span>
+        <h3>Never Miss</h3>
+        <p class="price">R7,500</p>
+        <p class="per">setup · then R950/month</p>
+        <ul>
+          <li>AI WhatsApp assistant on your number</li>
+          <li>Answers, qualifies &amp; books customers 24/7</li>
+          <li>Missed-call text-back</li>
+          <li>Every lead in one simple list, nothing lost</li>
+          <li>Everything in Get Found included</li>
+        </ul>
+        <a class="btn" href="https://wa.me/27645081270?text=Hi%2C%20I%27m%20interested%20in%20Never%20Miss">Stop missing customers</a>
+      </div>
+      <div class="pack">
+        <h3>Local Hero</h3>
+        <p class="price">R12,500</p>
+        <p class="per">setup · then R1,450/month</p>
+        <ul>
+          <li>Everything in Never Miss</li>
+          <li>Website refresh — fast, mobile-first</li>
+          <li>Online quote &amp; booking forms</li>
+          <li>Your own tech guy on WhatsApp</li>
+        </ul>
+        <a class="btn" href="https://wa.me/27645081270?text=Hi%2C%20I%27m%20interested%20in%20Local%20Hero">Go Local Hero</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="sec-label">How it works</p>
+    <h2>Three steps. No jargon. No lock-in.</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>Free 10-point checkup</h3>
+        <p>I audit your Google listing, website and enquiry flow, and send you a one-page report showing exactly where customers are slipping away. Free, no strings.</p>
+      </div>
+      <div class="step">
+        <h3>Install in days, not months</h3>
+        <p>Pick a package and I set it up on the tools you already use — your WhatsApp, your number, your Google listing. Most installs are live inside a week.</p>
+      </div>
+      <div class="step">
+        <h3>You watch the leads come in</h3>
+        <p>Every enquiry answered, every lead captured, every happy customer asked for a review. You focus on the work; the system minds the shop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / AUDIT -->
+<section class="about" style="padding-top:0">
+  <div class="wrap">
+    <div>
+      <p class="sec-label">Local, for real</p>
+      <h2>I'm from West Beach. You can actually phone me.</h2>
+      <p class="sub">I'm Octavian Blignaut, and Blouberg Digital is a one-man local business — the same as yours. No account managers, no call centre, no Joburg agency prices. When something needs fixing, you WhatsApp me and I fix it. That's the whole model.</p>
+    </div>
+    <div class="audit-card">
+      <h3>Free online health check for your business</h3>
+      <p>I'll check your Google listing, website, and how fast a customer can reach you — then send you a simple report with what's costing you customers. Takes me a day, costs you nothing.</p>
+      <a class="btn btn-green" href="https://wa.me/27645081270?text=Hi%2C%20I%27d%20like%20the%20free%20health%20check%20for%20my%20business">Claim your free check</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Blouberg Digital · West Beach, Cape Town</span>
+    <span><a href="https://wa.me/27645081270">WhatsApp</a> · <a href="mailto:hello@bloubergdigital.co.za">hello@bloubergdigital.co.za</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
