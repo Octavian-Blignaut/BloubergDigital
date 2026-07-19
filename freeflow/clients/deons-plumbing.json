@@ -1,0 +1,17 @@
+{
+  "businessId": "deons-plumbing",
+  "businessName": "Deon's Plumbing",
+  "trade": "plumber",
+  "ownerName": "Deon",
+  "ownerWhatsApp": "+27821234567",
+  "serviceArea": ["Table View", "Parklands", "Blouberg", "West Beach"],
+  "hours": "Mon-Fri 07:30-17:00, emergencies 24/7",
+  "calloutFee": "R450, quoted before any work starts",
+  "emergencyKeywords": ["burst", "flooding", "geyser leaking", "sewage"],
+  "qualifyingQuestions": [
+    { "id": "suburb", "ask": "Which suburb are you in?" },
+    { "id": "problem", "ask": "What's the problem? A photo helps a lot if you can send one." },
+    { "id": "urgency", "ask": "Is this an emergency, or can it wait for a scheduled slot?" }
+  ],
+  "tone": "friendly, plain English, no jargon, occasional Afrikaans greeting is fine"
+}

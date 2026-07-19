@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Receptionist — Demo Chat</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root { --wa-green: #25d366; --wa-teal: #075e54; --wa-bg: #e5ddd5; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: -apple-system, Helvetica, Arial, sans-serif;
+    background: #f0f0f0; display: flex; justify-content: center; padding: 20px;
+  }
+  .phone { width: 380px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+  .header { background: var(--wa-teal); color: white; padding: 14px 16px; display: flex; align-items: center; gap: 10px; }
+  .header .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--wa-green); display: flex; align-items: center; justify-content: center; font-weight: bold; }
+  .header select { margin-left: auto; font-size: 12px; }
+  .chat { height: 480px; background: var(--wa-bg); overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .bubble { max-width: 75%; padding: 8px 10px; border-radius: 8px; font-size: 14px; line-height: 1.35; white-space: pre-wrap; }
+  .in { align-self: flex-start; background: white; border-top-left-radius: 0; }
+  .out { align-self: flex-end; background: #dcf8c6; border-top-right-radius: 0; }
+  .composer { display: flex; padding: 8px; background: #f0f0f0; gap: 8px; }
+  .composer input { flex: 1; border: none; border-radius: 20px; padding: 10px 14px; font-size: 14px; }
+  .composer button { border: none; background: var(--wa-green); color: white; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 16px; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="header">
+    <div class="avatar">🔧</div>
+    <div>
+      <div id="bizName" style="font-weight:600;">Receptionist Demo</div>
+      <div style="font-size:11px;opacity:0.8;">online</div>
+    </div>
+    <select id="clientPicker"></select>
+  </div>
+  <div class="chat" id="chat"></div>
+  <div class="composer">
+    <input id="textInput" placeholder="Type a message" autocomplete="off" />
+    <button id="sendBtn">➤</button>
+  </div>
+</div>
+
+<script>
+  const chatEl = document.getElementById('chat');
+  const inputEl = document.getElementById('textInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const clientPicker = document.getElementById('clientPicker');
+  const bizNameEl = document.getElementById('bizName');
+
+  // Fake customer number, persisted per browser so the 24h session logic works naturally.
+  let customerNumber = localStorage.getItem('demoCustomerNumber');
+  if (!customerNumber) {
+    customerNumber = '+2760' + Math.floor(1000000 + Math.random() * 8999999);
+    localStorage.setItem('demoCustomerNumber', customerNumber);
+  }
+
+  function addBubble(text, direction) {
+    const div = document.createElement('div');
+    div.className = 'bubble ' + (direction === 'out' ? 'out' : 'in');
+    div.textContent = text;
+    chatEl.appendChild(div);
+    chatEl.scrollTop = chatEl.scrollHeight;
+  }
+
+  async function loadClients() {
+    const res = await fetch('/demo/clients');
+    const ids = await res.json();
+    clientPicker.innerHTML = ids.map(id => `<option value="${id}">${id}</option>`).join('');
+    bizNameEl.textContent = clientPicker.value;
+  }
+
+  clientPicker.addEventListener('change', () => {
+    bizNameEl.textContent = clientPicker.value;
+    chatEl.innerHTML = '';
+  });
+
+  async function sendMessage() {
+    const text = inputEl.value.trim();
+    if (!text) return;
+    addBubble(text, 'in'); // "in" from the phone's own perspective: it's what the customer typed
+    inputEl.value = '';
+    await fetch('/demo/message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ businessId: clientPicker.value, from: customerNumber, text }),
+    });
+  }
+
+  sendBtn.addEventListener('click', sendMessage);
+  inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+  async function pollReplies() {
+    try {
+      const res = await fetch('/demo/poll?from=' + encodeURIComponent(customerNumber));
+      const data = await res.json();
+      for (const msg of data.messages) addBubble(msg, 'out');
+    } catch (e) { /* ignore transient poll errors */ }
+    setTimeout(pollReplies, 1200);
+  }
+
+  loadClients().then(pollReplies);
+</script>
+</body>
+</html>
