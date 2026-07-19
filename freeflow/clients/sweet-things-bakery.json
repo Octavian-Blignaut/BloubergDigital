@@ -1,0 +1,18 @@
+{
+  "businessId": "sweet-things-bakery",
+  "businessName": "Sweet Things Bakery",
+  "trade": "bakery",
+  "ownerName": "Anja",
+  "ownerWhatsApp": "+27841234567",
+  "serviceArea": ["Blouberg", "Sunset Beach", "Big Bay"],
+  "hours": "Tue-Sat 08:00-16:00",
+  "calloutFee": "No callout fee — collection or local delivery, quoted per order",
+  "orderCutoffDays": 3,
+  "qualifyingQuestions": [
+    { "id": "dateNeeded", "ask": "What date do you need the order for?" },
+    { "id": "servings", "ask": "How many servings or what size cake are you after?" },
+    { "id": "flavourDesign", "ask": "What flavour and design did you have in mind? A photo of inspiration helps a lot if you have one." },
+    { "id": "budget", "ask": "Do you have a rough budget range in mind?" }
+  ],
+  "tone": "friendly, warm, plain English, no jargon, occasional Afrikaans greeting is fine"
+}

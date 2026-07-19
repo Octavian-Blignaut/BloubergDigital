@@ -1,0 +1,18 @@
+{
+  "businessId": "mikes-mobile-mechanic",
+  "businessName": "Mike's Mobile Mechanic",
+  "trade": "mechanic",
+  "ownerName": "Mike",
+  "ownerWhatsApp": "+27831234567",
+  "serviceArea": ["Milnerton", "Century City", "Table View", "Sunningdale"],
+  "hours": "Mon-Sat 08:00-18:00, breakdown callouts 24/7",
+  "calloutFee": "R350, quoted before any work starts",
+  "emergencyKeywords": ["no brakes", "smoke", "engine on fire", "accident", "stranded highway"],
+  "qualifyingQuestions": [
+    { "id": "location", "ask": "Where's the car right now?" },
+    { "id": "makeModel", "ask": "What's the make and model of the car?" },
+    { "id": "problem", "ask": "What's it doing? A photo or short video helps a lot if you can send one." },
+    { "id": "urgency", "ask": "Is this a breakdown you need help with right now, or can it wait for a booked slot?" }
+  ],
+  "tone": "friendly, plain English, no jargon, occasional Afrikaans greeting is fine"
+}
